@@ -15,8 +15,10 @@
         <thead>
             <tr>
                 <th>Nombre</th>
+                <th>Apellido</th>
                 <th>Email</th>
                 <th>Teléfono</th>
+                <th>Estado</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -24,8 +26,10 @@
             @foreach ($contacts as $contact)
                 <tr>
                     <td>{{ $contact->name }}</td>
+                    <td>{{ $contact->last_name }}</td>
                     <td>{{ $contact->email }}</td>
                     <td>{{ $contact->phone }}</td>
+                    <td>{{ ucfirst($contact->status) }}</td> <!-- Mostrando el estado -->
                     <td>
                         <a href="{{ route('contacts.show', $contact->id) }}" class="btn btn-info btn-sm">Ver</a>
                         <a href="{{ route('contacts.edit', $contact->id) }}" class="btn btn-warning btn-sm">Editar</a>

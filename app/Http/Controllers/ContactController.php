@@ -27,9 +27,11 @@ class ContactController extends Controller
         // Validación de los datos
         $request->validate([
             'name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
             'email' => 'required|email|unique:contacts,email',
             'phone' => 'required|string|max:20',
             'address' => 'nullable|string|max:255',
+            'status' => 'required|in:vendido,no interesado,contactado,no contactado',
         ]);
 
         try {
@@ -60,9 +62,11 @@ class ContactController extends Controller
         // Validación de los datos
         $request->validate([
             'name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
             'email' => 'required|email|unique:contacts,email,' . $contact->id,
             'phone' => 'required|string|max:20',
             'address' => 'nullable|string|max:255',
+            'status' => 'required|in:vendido,no interesado,contactado,no contactado',
         ]);
 
         try {
@@ -99,6 +103,7 @@ class ContactController extends Controller
         // Validar los datos del formulario
         $request->validate([
             'name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:contacts',
             'phone' => 'required|string|max:20',
             'message' => 'nullable|string|max:1000',
@@ -107,10 +112,12 @@ class ContactController extends Controller
         // Almacenar el contacto en la base de datos
         Contact::create([
             'name' => $request->name,
+            'last_name' => $request->last_name,
             'email' => $request->email,
             'phone' => $request->phone,
             'address' => $request->address,
             'message' => $request->message,
+            'status' => 'no contactado', // Valor predeterminado
         ]);
 
         // Redirigir con un mensaje de éxito
