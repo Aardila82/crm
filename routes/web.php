@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CampoController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -40,4 +42,5 @@ Route::middleware('auth')->group(function () {
 
     // Ruta para mostrar detalles de un contacto
     Route::get('/contacts/{contact}', [ContactController::class, 'show'])->name('contacts.show');
+    Route::resource('campos', CampoController::class);
 });
